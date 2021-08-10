@@ -5,7 +5,7 @@ const templateCard = document.getElementById('template-card').content;
 const fragment = document.createDocumentFragment();
 let like = [];
 let disLike = [];
-let control = 0;
+//let control = 0;
 document.addEventListener('DOMContentLoaded', () => {
     loadData(data);
 })
@@ -24,47 +24,51 @@ const loadData = data => {
     items.appendChild(fragment);
 }
 
-items.addEventListener('click', e => {
+
+items.addEventListener('click', e =>{
     addTotal(e)
 })
 
 const addTotal = e => {
-    if (e.target.classList.contains('btn-dark')) {
-        setTotal(e.target.parentElement);
-        control = 1;
-    } else if (e.target.classList.contains('btn-danger')) {
-        setTotal(e.target.parentElement);
-        control = 2;
-    }
+    if (e.target.classList.contains('btn-dark')){
+    setLike(e.target.parentElement);
+    }else if(e.target.classList.contains('btn-danger')){
+        setDislike(e.target.parentElement);
+        }
 }
 
-
-
-const setTotal = objeto => {
-    const botonLike = {
-        id: objeto.querySelector('.btn-dark').dataset.id,
-        cantidad: 1
+const setLike = objeto =>{
+    const boton = {
+    id: objeto.querySelector('.btn-dark').dataset.id,
+    cantidad : 1
     }
-    const botonDislike = {
-        id: objeto.querySelector('.btn-danger').dataset.id,
-        cantidad: 1
-    }
-
-    if (like.hasOwnProperty(botonLike.id) && control == 1) {
-        botonLike.cantidad = like[botonLike.id].cantidad + 1;
-        objeto.querySelector('#total-likes').textContent = botonLike.cantidad;
-    } else if (disLike.hasOwnProperty(botonDislike.id) && control == 2) {
-        botonLike.cantidad = like[botonLike.id].cantidad - 1;
-        objeto.querySelector('#total-likes').textContent = botonLike.cantidad;
-    }  else {
-        like[botonLike.id] = { ...botonLike };
-        disLike[botonDislike.id] = { ...botonDislike };
-        objeto.querySelector('#total-likes').textContent = botonLike.cantidad;
+    if(like.hasOwnProperty(boton.id)){
+        boton.cantidad = like[boton.id].cantidad+1;
+        objeto.querySelector('#like').textContent = boton.cantidad;
+    }else{
+        like[boton.id] = {...boton};
+        objeto.querySelector('#like').textContent = boton.cantidad;
     }
 
-    like[botonLike.id] = { ...botonLike };
-    console.log(like[botonLike.id])
-    console.log(`control es ${control}`);
+    like[boton.id] = {...boton};
+
+}
+
+const setDislike = objeto =>{
+    const boton = {
+    id: objeto.querySelector('.btn-danger').dataset.id,
+    cantidad : 1
+    }
+    if(disLike.hasOwnProperty(boton.id)){
+        boton.cantidad = disLike[boton.id].cantidad+1;
+        objeto.querySelector('#disLike').textContent = boton.cantidad;
+    }else{
+        disLike[boton.id] = {...boton};
+        objeto.querySelector('#disLike').textContent = boton.cantidad;
+    }
+
+    disLike[boton.id] = {...boton};
+
 }
 
 
