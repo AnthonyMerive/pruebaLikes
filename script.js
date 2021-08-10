@@ -24,45 +24,45 @@ const loadData = data => {
     items.appendChild(fragment);
 }
 
-
+//Carga evento Click
 items.addEventListener('click', e =>{
-    addTotal(e)
+    addTotal(e) // va a la funcion addTotal
 })
-
+//funcion addTotal:
 const addTotal = e => {
-    if (e.target.classList.contains('btn-dark')){
-    setLike(e.target.parentElement);
-    }else if(e.target.classList.contains('btn-danger')){
-        setDislike(e.target.parentElement);
+    if (e.target.classList.contains('btn-dark')){ //si toco el boton negro (like)
+    setLike(e.target.parentElement); //vaya a la funcion setLike
+    }else if(e.target.classList.contains('btn-danger')){ //contrario si toco (dislike)
+        setDislike(e.target.parentElement); //vaya a funcion setdisLike
         }
 }
-
+//funcion seLike:
 const setLike = objeto =>{
-    const boton = {
+    const boton = { //creamos un objeto donde se almacene la cantidad y el id de la card
     id: objeto.querySelector('.btn-dark').dataset.id,
-    cantidad : 1
+    cantidad : 1 //lo definimos en 1
     }
-    if(like.hasOwnProperty(boton.id)){
-        boton.cantidad = like[boton.id].cantidad+1;
-        objeto.querySelector('#like').textContent = boton.cantidad;
-    }else{
-        like[boton.id] = {...boton};
+    if(like.hasOwnProperty(boton.id)){ //si da click al boton
+        boton.cantidad = like[boton.id].cantidad+1; //sumele al objeto +1
+        objeto.querySelector('#like').textContent = boton.cantidad; //guarde en el objeto
+    }else{// de lo contrario para hacer que aumente el primer like en 1
+        like[boton.id] = {...boton}; 
         objeto.querySelector('#like').textContent = boton.cantidad;
     }
 
-    like[boton.id] = {...boton};
+    like[boton.id] = {...boton}; 
 
 }
-
+//funcion sedisLike:
 const setDislike = objeto =>{
-    const boton = {
+    const boton = { //creamos un objeto donde se almacene la cantidad y el id de la card
     id: objeto.querySelector('.btn-danger').dataset.id,
-    cantidad : 1
+    cantidad : 1//lo definimos en 1
     }
-    if(disLike.hasOwnProperty(boton.id)){
-        boton.cantidad = disLike[boton.id].cantidad+1;
-        objeto.querySelector('#disLike').textContent = boton.cantidad;
-    }else{
+    if(disLike.hasOwnProperty(boton.id)){//si da click al boton
+        boton.cantidad = disLike[boton.id].cantidad+1;//sumele al objeto +1
+        objeto.querySelector('#disLike').textContent = boton.cantidad;//guarde en el objeto
+    }else{// de lo contrario para hacer que aumente el primer like en 1
         disLike[boton.id] = {...boton};
         objeto.querySelector('#disLike').textContent = boton.cantidad;
     }
